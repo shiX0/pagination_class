@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pagination_class/features/pagination/presentation/view/comment_view.dart';
-import 'package:pagination_class/features/pagination/presentation/view/photo_view.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pagination_class/features/dashboard/presentation/viewmodel/dashboard_view_model.dart';
 
-
-class DashboardView extends StatelessWidget {
+class DashboardView extends ConsumerWidget {
   const DashboardView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return Scaffold(
       backgroundColor: Colors.amber[100],
       appBar: AppBar(
@@ -23,12 +22,7 @@ class DashboardView extends StatelessWidget {
           Card(
             child: InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const CommentView(),
-                  ),
-                );
+                ref.read(dashboardViewModel.notifier).openComments();
               },
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -51,12 +45,7 @@ class DashboardView extends StatelessWidget {
           Card(
             child: InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const PhotosView(),
-                  ),
-                );
+                ref.read(dashboardViewModel.notifier).openPhoto();
               },
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,

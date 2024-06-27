@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pagination_class/app/navigator_key/navigator_key.dart';
-import 'package:pagination_class/features/pagination/presentation/view/dashboard_view.dart';
+import 'package:pagination_class/features/dashboard/presentation/view/dashboard_view.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

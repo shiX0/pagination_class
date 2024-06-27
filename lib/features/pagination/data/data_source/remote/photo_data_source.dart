@@ -5,6 +5,7 @@ import 'package:pagination_class/app/constants/api_endpoints.dart';
 import 'package:pagination_class/app/failure/failure.dart';
 import 'package:pagination_class/core/networking/remote/http_service.dart';
 import 'package:pagination_class/features/pagination/data/model/photos.dart';
+import 'package:pagination_class/features/pagination/domain/entity/photo_entity.dart';
 
 
 final photoDataSourceProvider = Provider.autoDispose(
@@ -13,7 +14,7 @@ final photoDataSourceProvider = Provider.autoDispose(
 class PhotoDataSource {
   final Dio _dio;
   PhotoDataSource(this._dio);
-  Future<Either<Failure, List<Photos>>> getPhotos(int page) async {
+  Future<Either<Failure, List<PhotoEntity>>> getPhotos(int page) async {
     try {
       final response = await _dio.get(
         ApiEndpoints.photos,
@@ -24,7 +25,7 @@ class PhotoDataSource {
       );
       final data = response.data as List;
       final photos = data.map((e) => Photos.fromJson(e)).toList();
-      return Right(photos);
+      return Right(Photos);
     } on DioException catch (e) {
       return Left(Failure(message: e.message.toString()));
     }

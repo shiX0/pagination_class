@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pagination_class/features/pagination/domain/entity/photo_entity.dart';
 
 part 'photos.g.dart';
 
@@ -22,6 +23,11 @@ class Photos extends Equatable {
   factory Photos.fromJson(Map<String, dynamic> json) => _$PhotosFromJson(json);
 
   Map<String, dynamic> toJson() => _$PhotosToJson(this);
+
+  PhotoEntity toEntity() => PhotoEntity(albumId, id, thumbnailUrl, title, url);
+
+  List<PhotoEntity> toEntityList(List<Photos> photos) =>
+      photos.map((photo) => photo.toEntity()).toList();
 
   @override
   List<Object?> get props => [
